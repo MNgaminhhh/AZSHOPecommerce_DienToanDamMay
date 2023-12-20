@@ -29,7 +29,7 @@
 						<ul class="nav nav-pills nav-stacked">
 							<li><a href="#">Nguyễn Minh - 21110242</a></li>
 							<li><a href="#">Vũ Ngọc Nam - 21110252</a></li>
-							<li><a href="#">Phan Thị Yến Nhi - 21110267</a></li>
+							<li><a href="#">Nguyễn Hoàng Yến Nhi - 21110267</a></li>
 						</ul>
 					</div>
 				</div>

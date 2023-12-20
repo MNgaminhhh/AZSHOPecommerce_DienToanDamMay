@@ -19,7 +19,7 @@
         <property name="context-root" value="AZSHOP"/>
                         
         
-        <property name="java-output-path" value="/AZSHOP/target/classes"/>
+        <property name="java-output-path" value="/target/classes"/>
                     
     
     </wb-module>

@@ -25,7 +25,7 @@
 		</div>
 		<h3>Tạo mới đơn hàng</h3>
 		<div class="table-responsive">
-			<form action="/AZSHOP/user/vnpayajax" id="frmCreateOrder" method="post">
+			<form action="/user/vnpayajax" id="frmCreateOrder" method="post">
 				<div class="form-group">
 					<label for="amount">Số tiền</label> <input class="form-control"
 						data-val="true"

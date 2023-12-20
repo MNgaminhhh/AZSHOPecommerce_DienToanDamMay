@@ -22,7 +22,7 @@
 							<p>Thông tin người gửi</p>
 							<form>
 								<input id="senderName" type="text" placeholder="Tên người gửi"
-									value="AZSHOP" readonly> <input id="senderPhone"
+									value="AZSHOP-1.0" readonly> <input id="senderPhone"
 									type="text" placeholder="Số điện thoại" value="0981141044"
 									readonly> <input id="senderAddress" type="text"
 									placeholder="Địa chỉ" value="P14, Gò vấp, HCM" readonly>
@@ -148,54 +148,57 @@
 	<script>
 	// Đăng ký sự kiện sau khi trang đã được tải
     function validateForm(total_amount) {
-    	event.preventDefault();
-        var senderName = document.getElementById('senderName').value;
-        var senderPhone = document.getElementById('senderPhone').value;
-        var senderAddress = document.getElementById('senderAddress').value;
-
-        var receiverName = document.getElementById('receiverName').value;
-        var receiverPhone = document.getElementById('receiverPhone').value;
-        var receiverAddress = document.getElementById('receiverAddress').value;
-
-        var paymentMethodCash = document.getElementById('cash').checked;
-        var paymentMethodCard = document.getElementById('card').checked;
-
-        if (!senderName || !senderPhone || !senderAddress || !receiverName || !receiverPhone || !receiverAddress) {
-            alert('Vui lòng điền đầy đủ thông tin người gửi và người nhận.');
-            return false;
-        }
-
-        if (!(paymentMethodCash || paymentMethodCard)) {
-            alert('Vui lòng chọn phương thức thanh toán.');
-            return false;
-        }
-		if (paymentMethodCard){
-            window.location.href = '/AZSHOP/user/paymentMethodCart?total_amount='+total_amount;
+		event.preventDefault();
+	
+		var senderName = document.getElementById('senderName').value;
+		var senderPhone = document.getElementById('senderPhone').value;
+		var senderAddress = document.getElementById('senderAddress').value;
+	
+		var receiverName = document.getElementById('receiverName').value;
+		var receiverPhone = document.getElementById('receiverPhone').value;
+		var receiverAddress = document.getElementById('receiverAddress').value;
+	
+		var paymentMethodCash = document.getElementById('cash').checked;
+		var paymentMethodCard = document.getElementById('card').checked;
+	
+		if (!senderName || !senderPhone || !senderAddress || !receiverName || !receiverPhone || !receiverAddress) {
+			alert('Vui lòng điền đầy đủ thông tin người gửi và người nhận.');
+			return false;
 		}
-		else{
-	        // Ajax request to submit data
-	        $.ajax({
-	            url: '/AZSHOP/user/addbill',
-	            type: 'GET',
-	            data: {
-	                // your data here
-	                total_amount: ${total_amount},
-	                receiver : receiverName,
-	                phone : receiverPhone,
-	                address : receiverAddress 
-	            },
-	            success: function (data) {
-	                // Process the success response
-	                window.location.href = '/AZSHOP/user/thanks';
-	            },
-	            error: function (xhr) {
-	                // Handle the error if needed
-	            }
-	        });
+	
+		if (!(paymentMethodCash || paymentMethodCard)) {
+			alert('Vui lòng chọn phương thức thanh toán.');
+			return false;
 		}
-
-        return true;
-    }
+	
+		if (paymentMethodCard) {
+			// Use encodeURIComponent to properly handle special characters in the URL
+			window.location.href = '/user/paymentMethodCart?total_amount=' + encodeURIComponent(total_amount);
+		} else {
+			// Ajax request to submit data
+			$.ajax({
+				url: '/user/addbill',
+				type: 'POST', // Consider using POST for more secure data transmission
+				data: {
+					total_amount: total_amount,
+					receiver: receiverName,
+					phone: receiverPhone,
+					address: receiverAddress
+				},
+				success: function (data) {
+					// Process the success response
+					window.location.href = '/user/thanks';
+				},
+				error: function (xhr) {
+					// Handle the error if needed
+					console.error('AJAX request failed:', xhr.statusText);
+				}
+			});
+		}
+	
+		return true;
+	}
+	
 </script>
 </body>
 </html>

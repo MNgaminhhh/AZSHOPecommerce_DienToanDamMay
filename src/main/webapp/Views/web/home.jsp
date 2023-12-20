@@ -78,7 +78,7 @@
 		function loadAjax() {
 			var amount = $(".productAjax").length;
 			$.ajax({
-				url : "/AZSHOP/loadAjax",
+				url : "/loadAjax",
 				type : "get",
 				data : {
 					exists : amount,
